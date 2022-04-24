@@ -14,8 +14,11 @@ def index():
         name = request.form['name']
         story = request.form['story']
         source = request.form['degree']
-        todos.insert_one({'char_name': name, 'char_desc': story, 'source': source})
+        comment = request.form['comment']
+        type = request.form['type']
+        todos.insert_one({'char_name': name, 'char_desc': story, 'source': source, 'comment': comment, 'type': type})
         return redirect(url_for('index'))
 
     all_todos = todos.find()
     return render_template('index.html', todos=all_todos)
+

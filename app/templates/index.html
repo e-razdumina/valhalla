@@ -27,6 +27,14 @@
             <input type="text" name="story"
                 placeholder="print char's story"></input>
         </p>
+        <p>
+            <input type="text" name="comment"
+                placeholder="print comment"></input>
+        </p>
+        <p>
+            <input type="text" name="type"
+                placeholder="print char's type"></input>
+        </p>
 
         <p>
             <b><label for="degree">Source</label></b>
@@ -48,7 +56,7 @@
         <hr>
     {% for todo in todos %}
         <div class="todo">
-            <p>{{todo['source'] }} {{ todo['char_name']}} {{ todo['char_desc']}} </i></p>
+            <p>{{todo['source']}} {{ todo['type']}} {{ todo['char_name']}} {{ todo['char_desc']}} {{ todo['comment']}}</i></p>
         </div>
     {% endfor %}
     </div>

@@ -3,8 +3,8 @@ import requests
 import urllib.request
 import re
 
-def vikings_tv_pars():
 
+def vikings_tv_pars():
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/80.0.3987.149 Safari/537.36'}
@@ -18,7 +18,6 @@ def vikings_tv_pars():
 
     vikings_cast_block = vikings_soup.find('div', {'class': 'tile-list tile-boxed'})
     vikings_cast = vikings_cast_block.find_all('li')
-
 
     for vik in vikings_cast:
 
@@ -45,7 +44,7 @@ def vikings_tv_pars():
             try:
                 new_part = info_block.find_all('p')[i].getText()
                 actor_story += new_part
-                i+=1
+                i += 1
 
             except:
                 break
@@ -53,11 +52,15 @@ def vikings_tv_pars():
         # char_data['img'] = img
         char_data['char_name'] = char_name
         char_data['char_desc'] = char_desc
+        char_data['type'] = 'is_character'
+        char_data['comment'] = f'Was played by {actor_name}'
         char_data['source'] = 'vikings_tv'
 
         # actor_data['img'] = img
         actor_data['char_name'] = actor_name
         actor_data['char_desc'] = actor_story
+        actor_data['type'] = 'is_actor'
+        actor_data['comment'] = f'Played {char_name}'
         actor_data['source'] = 'vikings_tv'
 
         cast_list.append(char_data)
@@ -67,7 +70,6 @@ def vikings_tv_pars():
 
 
 def norsemen_tv_pars_wiki():
-
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/80.0.3987.149 Safari/537.36'}
@@ -109,14 +111,13 @@ def norsemen_tv_pars_wiki():
         except:
             img = ''
 
-
         actor_story = ''
 
         for i in range(len(nor_soup.find_all('p'))):
             try:
                 new_part = nor_soup.find_all('p')[i].getText()
                 actor_story += new_part
-                i+=1
+                i += 1
 
             except:
                 pass
@@ -124,22 +125,26 @@ def norsemen_tv_pars_wiki():
         # char_data['img'] = img
         char_data['char_name'] = char_name
         char_data['char_desc'] = char_desc
-        char_data['source'] ='norsemen_tv'
+        char_data['type'] = 'is_character'
+        char_data['comment'] = f'Was played by {actor_name}'
+        char_data['source'] = 'norsemen_tv'
 
         # actor_data['img'] = img
         actor_data['char_name'] = actor_name
         actor_data['char_desc'] = actor_story
+        actor_data['type'] = 'is_actor'
+        actor_data['comment'] = f'Played {char_name}'
         actor_data['source'] = 'norsemen_tv'
 
         cast_list.append(char_data)
         cast_list.append(actor_data)
     return cast_list
 
-def norsemen_nfl_wiki():
 
+def norsemen_nfl_wiki():
     header = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/80.0.3987.149 Safari/537.36'}
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/80.0.3987.149 Safari/537.36'}
 
     team_list = []
     main_link = 'https://www.vikings.com'
@@ -163,12 +168,13 @@ def norsemen_nfl_wiki():
 
         try:
             img_link = player.find('img', {'class': 'img-responsive'})['src'].split('/')[-1]
-            img = requests.get(f'https://static.clubs.nfl.com/image/private/t_thumb_squared/f_auto/vikings/{img_link}').content
+            img = requests.get(
+                f'https://static.clubs.nfl.com/image/private/t_thumb_squared/f_auto/vikings/{img_link}').content
 
         except:
             img = ''
 
-        player_name =  player_soup.find('h1').getText()
+        player_name = player_soup.find('h1').getText()
         player_story = player_soup.find('div', {'class': 'nfl-c-body-part nfl-c-body-part--text'}).getText()
 
         if player_name in check:
@@ -177,6 +183,8 @@ def norsemen_nfl_wiki():
         # team_data['img'] = img
         team_data['char_name'] = player_name
         team_data['char_desc'] = player_story
+        team_data['type'] = 'is_player'
+        team_data['comment'] = ''
         team_data['source'] = 'norsemen_nfl'
 
         team_list.append(team_data)
