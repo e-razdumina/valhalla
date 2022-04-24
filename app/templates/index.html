@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valhalla DB</title>
+    <style>
+        .todo {
+            padding: 20px;
+            margin: 10px;
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h1>Understanding Valhalla</h1>
+    <hr>
+    <div class="content">
+    <form method="post">
+        <p>
+            <b><label for="content">Post</label></b>
+        </p>
+        <p>
+            <input type="text" name="name"
+                placeholder="print char name to add"></input>
+        </p>
+        <p>
+            <input type="text" name="story"
+                placeholder="print char's story"></input>
+        </p>
+
+        <p>
+            <b><label for="degree">Source</label></b>
+        </p>
+        <p>
+            <input id="degree-0" name="degree" required type="radio" value="vikings_tv">
+            <label for="degree-0">vikings_tv</label>
+        </p>
+        <p>
+            <input id="degree-1" name="degree" required type="radio" value="norsemen_tv">
+            <label for="degree-1">norsemen_tv</label>
+        </p>
+        <p>
+            <input id="degree-2" name="degree" required type="radio" value="norsemen_nfl">
+            <label for="degree-2">norsemen_nfl</label>
+        </p>
+        <button type="submit">Submit</button>
+    </form>
+        <hr>
+    {% for todo in todos %}
+        <div class="todo">
+            <p>{{todo['source'] }} {{ todo['char_name']}} {{ todo['char_desc']}} </i></p>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
