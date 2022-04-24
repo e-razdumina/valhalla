@@ -8,6 +8,11 @@ client = MongoClient('localhost', 27017)
 db = client.flask_db
 todos = db.valhalla
 
+with open('db.json') as file:
+    file_data = json.load(file)
+
+todos.insert_many(file_data)
+
 @app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method=='POST':
