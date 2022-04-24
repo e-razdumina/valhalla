@@ -27,3 +27,8 @@ def index():
     all_todos = todos.find()
     return render_template('index.html', todos=all_todos)
 
+if __name__ == "__main__":
+	print(("* Flask starting server..."
+		"please wait until server has fully started"))
+	port = int(os.environ.get('PORT', 8180))
+	app.run(host='0.0.0.0', debug=True, port=port)
